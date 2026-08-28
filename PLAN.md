@@ -80,13 +80,13 @@ Desarrollo de una landing page e-commerce interactiva para la venta de:
 **Objetivo:** Web 100% productiva, indexable y compartible, preparada para dominio y publicidad.
 
 - [x] `3.0` Migrar el repo a la org `hogar-de-codornices` + URL raíz `hogar-de-codornices.github.io` + token clásico configurado.
-- [ ] `3.1` Configurar SEO en `index.html`: OpenGraph + Twitter Cards, `canonical`, `theme-color`, `og:image` absoluta (1200×630), `og:locale=es_AR`.
-- [ ] `3.2` Agregar `JSON-LD LocalBusiness` (nombre, URL, zona Ituzaingó, WhatsApp, Instagram, rango de precios).
-- [ ] `3.3` Crear `public/`: `favicon.svg`, `robots.txt`, `sitemap.xml`.
+- [x] `3.1` Configurar SEO en `index.html`: OpenGraph + Twitter Cards, `canonical`, `theme-color`, `og:image` absoluta (1200×630), `og:locale=es_AR`.
+- [x] `3.2` Agregar `JSON-LD LocalBusiness` (nombre, URL, zona Ituzaingó, WhatsApp, Instagram, rango de precios).
+- [x] `3.3` Crear `public/`: `favicon.svg`, `robots.txt`, `sitemap.xml`.
 - [ ] `3.4` Textos de confianza: "Cómo pedir", entregas y **formas de pago** (pendiente de definir con mamá → Sprint 4).
-- [ ] `3.5` Optimización de carga: `preconnect` a Unsplash/fuentes y `loading="lazy"` en imágenes.
-- [ ] `3.6` Desplegar y verificar URL raíz en producción + validar en celular real (cierra tarea `2.5`).
-- [ ] `3.7` Actualizar este `PLAN.md` según la Regla de Oro.
+- [x] `3.5` Optimización de carga: `preconnect` a Unsplash/fuentes y `loading="lazy"` en imágenes.
+- [ ] `3.6` Desplegar y verificar URL raíz en producción + validar en celular real (cierra tarea `2.5`). *(Deploy verificado desde navegador; falta validar en celular real.)*
+- [x] `3.7` Actualizar este `PLAN.md` según la Regla de Oro.
 
 ---
 
