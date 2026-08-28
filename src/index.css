@@ -45,6 +45,12 @@ body,
 body {
   font-family: 'DM Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
+  background-color: #f8ebdb;
+  background-image:
+    radial-gradient(ellipse at 15% 10%, rgba(255, 245, 225, 0.72) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 80%, rgba(180, 120, 60, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(248, 235, 219, 0) 0%, rgba(224, 200, 165, 0.18) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
 }
 
 .font-serif {

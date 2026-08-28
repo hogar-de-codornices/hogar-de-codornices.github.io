@@ -1,0 +1,10 @@
+{
+  "description": "This professional web application offers a sleek, user-friendly interface designed for businesses seeking to enhance their online presence and user engagement.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

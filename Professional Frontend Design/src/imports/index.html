@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hogar de Codornices | Huevos y codornices de campo</title>
+  <meta name="description" content="Venta de huevos de codorniz y codornices. Pedidos por WhatsApp. Ituzaingó, Zona Oeste, Buenos Aires.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">Hogar de <span>Codornices</span></a>
+      <nav class="nav">
+        <a href="#productos">Productos</a>
+        <a href="#pedido">Mi pedido</a>
+        <a href="#contacto">Contacto</a>
+        <a href="https://www.instagram.com/hogar_de_codornices/" target="_blank" rel="noopener">Instagram</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <h1>Huevos de codorniz y codornices del hogar</h1>
+        <p>Productos frescos de nuestra granja familiar. Hace tu pedido directo por WhatsApp y coordinamos la entrega en Ituzaingó y alrededores.</p>
+        <div class="hero-actions">
+          <a href="#productos" class="btn btn-primary">Ver productos</a>
+          <a href="https://wa.me/5491156916710" target="_blank" rel="noopener" class="btn btn-wa">Consultar por WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="assets/img/hero.svg" alt="Huevos de codorniz del Hogar de Codornices">
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <section id="productos" class="section">
+      <h2 class="section-title">Nuestros productos</h2>
+      <p class="section-sub">Elegí la cantidad y consultá por WhatsApp. Todos los pedidos se coordinan directamente con la Administradora.</p>
+
+      <div class="grid">
+
+        <article class="card" data-id="huevos" data-nombre="Huevos de codorniz" data-precio="4500" data-unidad="caja de 12">
+          <img src="assets/img/huevos.svg" alt="Caja de huevos de codorniz" class="card-img">
+          <h3>Huevos de codorniz</h3>
+          <p class="card-desc">Frescos, ricos y saludables. Venta por caja de 12 unidades.</p>
+          <p class="card-price">$4.500 <span>/ caja de 12</span></p>
+          <div class="qty">
+            <button class="qty-btn" data-accion="restar">-</button>
+            <span class="qty-num">0</span>
+            <button class="qty-btn" data-accion="sumar">+</button>
+          </div>
+          <button class="btn btn-wa card-wa">Consultar por WhatsApp</button>
+        </article>
+
+        <article class="card" data-id="hembras" data-nombre="Codorniz hembra" data-precio="9000" data-unidad="unidad">
+          <img src="assets/img/hembra.svg" alt="Codorniz hembra" class="card-img">
+          <h3>Codornices hembras</h3>
+          <p class="card-desc">Ponedoras listas para tu cría o consumo. Venta por unidad.</p>
+          <p class="card-price">$9.000 <span>/ unidad</span></p>
+          <div class="qty">
+            <button class="qty-btn" data-accion="restar">-</button>
+            <span class="qty-num">0</span>
+            <button class="qty-btn" data-accion="sumar">+</button>
+          </div>
+          <button class="btn btn-wa card-wa">Consultar por WhatsApp</button>
+        </article>
+
+        <article class="card" data-id="machos" data-nombre="Codorniz macho" data-precio="5000" data-unidad="unidad">
+          <img src="assets/img/macho.svg" alt="Codorniz macho" class="card-img">
+          <h3>Codornices machos</h3>
+          <p class="card-desc">Reproductores fuertes y sanos. Venta por unidad.</p>
+          <p class="card-price">$5.000 <span>/ unidad</span></p>
+          <div class="qty">
+            <button class="qty-btn" data-accion="restar">-</button>
+            <span class="qty-num">0</span>
+            <button class="qty-btn" data-accion="sumar">+</button>
+          </div>
+          <button class="btn btn-wa card-wa">Consultar por WhatsApp</button>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="pedido" class="section resumen">
+      <h2 class="section-title">Tu pedido</h2>
+      <div id="resumen-lista" class="resumen-lista">
+        <p class="resumen-vacio">Todavía no agregaste productos.</p>
+      </div>
+      <div class="resumen-footer">
+        <p class="resumen-total">Total estimado: <strong id="resumen-total">$0</strong></p>
+        <button id="enviar-pedido" class="btn btn-wa btn-lg" disabled>Enviar pedido por WhatsApp</button>
+      </div>
+      <p class="resumen-nota">El pedido se envía como mensaje prearmado a la Administradora. Después de pagar o acordar, coordinamos la entrega.</p>
+    </section>
+
+    <section id="contacto" class="section contacto">
+      <h2 class="section-title">Contacto y entrega</h2>
+      <div class="contacto-grid">
+        <div>
+          <p><strong>Administradora:</strong> Alessandra Rostirolla</p>
+          <p><strong>WhatsApp:</strong> <a href="https://wa.me/5491156916710" target="_blank" rel="noopener">+54 9 11 5691-6710</a></p>
+          <p><strong>Zona de entrega:</strong> Ituzaingó, Buenos Aires, Argentina.</p>
+          <p><strong>Instagram:</strong> <a href="https://www.instagram.com/hogar_de_codornices/" target="_blank" rel="noopener">@hogar_de_codornices</a></p>
+        </div>
+        <div>
+          <p class="contacto-msj">¿Dudas sobre los productos, precios o entrega? Escribinos y te respondemos a la brevedad.</p>
+          <a href="https://wa.me/5491156916710" target="_blank" rel="noopener" class="btn btn-wa">Chatear por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Hogar de Codornices - Ituzaingó, Buenos Aires</p>
+      <p>
+        <a href="https://www.instagram.com/hogar_de_codornices/" target="_blank" rel="noopener">Instagram</a>
+        |
+        <a href="https://wa.me/5491156916710" target="_blank" rel="noopener">WhatsApp</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
