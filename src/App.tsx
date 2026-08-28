@@ -214,7 +214,7 @@ export default function App() {
                 onMouseEnter={(e) => { e.currentTarget.style.boxShadow = "0 8px 40px rgba(44,26,14,0.14)"; e.currentTarget.style.transform = "translateY(-4px)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "0 2px 16px rgba(44,26,14,0.07)"; e.currentTarget.style.transform = "translateY(0)"; }}>
                 <div className="card-media" style={{ overflow: "hidden", backgroundColor: "#e8d5bc" }}>
-                  <img src={p.img} alt={p.alt} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }}
+                  <img src={p.img} alt={p.alt} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }}
                     onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.06)")}
                     onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")} />
                 </div>
@@ -402,6 +402,7 @@ export default function App() {
               <img
                 src="https://images.unsplash.com/photo-1711714096280-1fd5d63b9ebe?w=700&h=500&fit=crop&auto=format"
                 alt="Codornices del Hogar de Codornices"
+                loading="lazy"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(44,26,14,0.75) 0%, rgba(44,26,14,0.1) 55%)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "36px" }}>

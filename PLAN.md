@@ -76,36 +76,78 @@ Desarrollo de una landing page e-commerce interactiva para la venta de:
 
 ---
 
-### 🔴 Sprint 3: Integración con Mercado Pago y Checkout Pro
-**Objetivo:** Generar preferencia de pago e integrar los botones de cobro en la app.
+### 🟠 Sprint 3: Dejar la Web Lista (SEO + Despliegue) — EN CURSO
+**Objetivo:** Web 100% productiva, indexable y compartible, preparada para dominio y publicidad.
 
-- [ ] `3.1` Registrar la aplicación en el Panel de Desarrolladores de Mercado Pago y obtener credenciales (Test / Prod).
-- [ ] `3.2` Configurar endpoint/función backend o Serverless Function para crear la `preference` de Mercado Pago con los items del carrito.
-- [ ] `3.3` Configurar las URLs de retorno (`back_urls`): `success`, `failure`, `pending`.
-- [ ] `3.4` Integrar el SDK de Mercado Pago en el frontend para abrir el checkout al hacer clic en "Pagar".
-- [ ] `3.5` Realizar pruebas de pago en ambiente de Sandbox / Test.
-
----
-
-### 🔵 Sprint 4: Flujo Post-Pago y Redirección con Comprobante
-**Objetivo:** Confirmar el pago e instruir al cliente para enviar la confirmación final por WhatsApp.
-
-- [ ] `4.1` Crear la vista / página de "Pago Exitoso" (`/success`).
-- [ ] `4.2` Capturar parámetros de la URL devueltos por Mercado Pago (`payment_id`, `status`, `external_reference`).
-- [ ] `4.3` Generar el mensaje automático de confirmación para WhatsApp que incluya:
-  - 🛒 Resumen de lo comprado.
-  - 🆔 ID de transacción / Comprobante de Mercado Pago.
-  - 💵 Estado de la transacción ("PAGADO").
-- [ ] `4.4` Diseñar el botón principal en la pantalla de éxito: *"Enviar comprobante y coordinar entrega por WhatsApp"*.
-- [ ] `4.5` Probar el flujo completo de punta a punta (End-to-End).
+- [x] `3.0` Migrar el repo a la org `hogar-de-codornices` + URL raíz `hogar-de-codornices.github.io` + token clásico configurado.
+- [ ] `3.1` Configurar SEO en `index.html`: OpenGraph + Twitter Cards, `canonical`, `theme-color`, `og:image` absoluta (1200×630), `og:locale=es_AR`.
+- [ ] `3.2` Agregar `JSON-LD LocalBusiness` (nombre, URL, zona Ituzaingó, WhatsApp, Instagram, rango de precios).
+- [ ] `3.3` Crear `public/`: `favicon.svg`, `robots.txt`, `sitemap.xml`.
+- [ ] `3.4` Textos de confianza: "Cómo pedir", entregas y **formas de pago** (pendiente de definir con mamá → Sprint 4).
+- [ ] `3.5` Optimización de carga: `preconnect` a Unsplash/fuentes y `loading="lazy"` en imágenes.
+- [ ] `3.6` Desplegar y verificar URL raíz en producción + validar en celular real (cierra tarea `2.5`).
+- [ ] `3.7` Actualizar este `PLAN.md` según la Regla de Oro.
 
 ---
 
-### ⚪ Sprint 5: Pulido, SEO y Despliegue
-**Objetivo:** Dejar la web 100% productiva en internet.
+### 🟢 Sprint 4: Datos reales (con mamá) — PENDIENTE
+**Objetivo:** Precios, fotos y datos reales del negocio.
 
-- [ ] `5.1` Optimizar imágenes y tiempos de carga.
-- [ ] `5.2` Configurar OpenGraph (vista previa al compartir la web en WhatsApp/redes).
-- [ ] `5.3` Desplegar el proyecto en la plataforma elegida (Netlify / Vercel).
-- [ ] `5.4` Configurar credenciales de Producción de Mercado Pago.
-- [ ] `5.5` Realizar prueba final en producción con una compra real de bajo monto.
+- [ ] `4.1` Confirmar precios finales y actualizarlos en `PRODUCTS`.
+- [ ] `4.2` Subir fotos reales (huevos + codornices) en `assets/img`, reemplazar Unsplash, `alt` y `og-image`.
+- [ ] `4.3` Definir formas de pago, horarios y modalidad de entrega.
+- [ ] `4.4` Actualizar mensaje de WhatsApp con los datos finales.
+- [ ] `4.5` Redes: subir las mismas fotos a Instagram y desplegar.
+
+---
+
+### 🔵 Sprint 5: Presencia local en Google (gratis, alto impacto)
+**Objetivo:** Que el negocio aparezca en Google y Maps de Ituzaingó sin pagar.
+
+- [ ] `5.1` Crear **Perfil de Negocio en Google** ("Hogar de Codornices", zona Ituzaingó).
+- [ ] `5.2` Completar perfil: categoría, fotos reales, horarios, teléfono, link a la web.
+- [ ] `5.3` Verificar el negocio y pedir primeras reseñas a conocidos.
+- [ ] `5.4` Registrar la web en **Google Search Console** + enviar `sitemap.xml`.
+- [ ] `5.5` Confirmar que aparece en Google Maps de la zona.
+
+---
+
+### 🟣 Sprint 6: Dominio propio
+**Objetivo:** Comprar y conectar un dominio sin `.github.io`.
+
+- [ ] `6.1` Elegir y registrar dominio `.com` internacional (~US$10/año) — sin CUIT. Candidato: `hogar-de-codornices.com` (chequear disponibilidad).
+- [ ] `6.2` Conectarlo a GitHub Pages (custom domain en Settings → Pages + CNAME).
+- [ ] `6.3` Actualizar `canonical`/OG a la URL final y verificar HTTPS.
+- [ ] `6.4` Agendar renovación anual del dominio.
+
+---
+
+### 🟡 Sprint 7: Publicidad digital
+**Objetivo:** Campañas pagas que conviertan en mensajes de WhatsApp.
+
+- [ ] `7.1` Definir presupuesto inicial y objetivo medible (mensajes de WhatsApp recibidos).
+- [ ] `7.2` Campaña **Instagram/Facebook Ads** local (radio Ituzaingó / zona oeste) con foto real + CTA "Pedido por WhatsApp".
+- [ ] `7.3` Campaña **Google Ads (Search)** con palabras de intención local + extensión de lugar/llamada (requiere Sprint 5).
+- [ ] `7.4` Tracking de conversión: clic en "Enviar pedido por WhatsApp".
+- [ ] `7.5` Revisión semanal: costo por mensaje, ajustar presupuesto.
+
+---
+
+### 🔴 Sprint 8: Pagos online (OPCIONAL / futuro)
+**Objetivo:** Pago por Mercado Pago (a evaluar cuando el volumen lo justifique).
+
+- [ ] `8.1` Registrar app en Mercado Pago y obtener credenciales (Test/Prod).
+- [ ] `8.2` Crear función para generar la `preference` con los items del carrito (`back_urls`: success/failure/pending).
+- [ ] `8.3` Integrar Checkout Pro en el frontend.
+- [ ] `8.4` Post-pago: pantalla de éxito + envío de comprobante por WhatsApp.
+- [ ] `8.5` Prueba end-to-end con compra real de bajo monto.
+
+---
+
+## 🗓️ Roadmap
+- **Semana 1**: Sprint 3 (dejar la web lista) → después: precios/fotos con mamá (Sprint 4).
+- **Semana 2-3**: Sprint 5 (Perfil de Google + Search Console) → Sprint 6 (dominio `.com`).
+- **Semana 4+**: Sprint 7 (publicidad IG + Google Ads) → evaluar Sprint 8 (Mercado Pago) según demanda.
+
+## 🔑 Palabras clave para publicidad (referencia)
+`huevos de codorniz ituzaingó`, `huevos de codorniz`, `codornices a la venta zona oeste`, `codornices ponedoras buenos aires`, `comprar codornices`, `huevos de granja ituzaingó`, `codorniz para criadero`, `huevos de codorniz por mayor`.
