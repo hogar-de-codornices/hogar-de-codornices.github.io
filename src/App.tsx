@@ -100,11 +100,11 @@ export default function App() {
           borderBottom: scrolled ? "1px solid rgba(113,77,37,0.1)" : "none",
         }}
       >
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <a href="#" className="font-serif" style={{ fontSize: "1.25rem", color: "#714d25", textDecoration: "none", letterSpacing: "-0.01em" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center" }}>
+          <a href="#" className="font-serif" style={{ gridColumn: 1, justifySelf: "start", fontSize: "1.25rem", color: "#714d25", textDecoration: "none", letterSpacing: "-0.01em" }}>
             Hogar de <em>Codornices</em>
           </a>
-          <nav className="nav-desktop" style={{ display: "flex", alignItems: "center", gap: "32px" }}>
+          <nav className="nav-desktop" style={{ gridColumn: 2, justifySelf: "center", display: "flex", alignItems: "center", gap: "32px" }}>
             {["#productos|Productos", "#pedido|Mi pedido", "#contacto|Contacto"].map((item) => {
               const [href, label] = item.split("|");
               return (
@@ -115,13 +115,13 @@ export default function App() {
               Instagram
             </a>
           </nav>
-          <button className={`nav-toggle${menuAbierto ? " open" : ""}`} onClick={() => setMenuAbierto(!menuAbierto)} aria-label="Abrir menú" aria-expanded={menuAbierto}>
+          <button className={`nav-toggle${menuAbierto ? " open" : ""}`} onClick={() => setMenuAbierto(!menuAbierto)} aria-label="Abrir menú" aria-expanded={menuAbierto} style={{ gridColumn: 2, justifySelf: "center" }}>
             <span></span>
             <span></span>
             <span></span>
           </button>
           <a href={waSimple} target="_blank" rel="noopener"
-            style={{ backgroundColor: "#714d25", color: "#f8ebdb", textDecoration: "none", fontSize: "0.8125rem", fontWeight: 600, padding: "9px 20px", borderRadius: "999px", letterSpacing: "0.02em", transition: "opacity 0.2s, transform 0.2s" }}
+            style={{ gridColumn: 3, justifySelf: "end", backgroundColor: "#714d25", color: "#f8ebdb", textDecoration: "none", fontSize: "0.8125rem", fontWeight: 600, padding: "9px 20px", borderRadius: "999px", letterSpacing: "0.02em", transition: "opacity 0.2s, transform 0.2s" }}
             onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.88"; e.currentTarget.style.transform = "translateY(-1px)"; }}
             onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.transform = "translateY(0)"; }}>
             WhatsApp ↗
