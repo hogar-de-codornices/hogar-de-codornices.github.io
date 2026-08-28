@@ -72,7 +72,7 @@ Desarrollo de una landing page e-commerce interactiva para la venta de:
 - [x] `2.2` Diseñar la función generadora de mensajes de WhatsApp (`buildWhatsAppMessage`).
 - [x] `2.3` Formatear el texto de resumen: detalle de items, cantidades, precio estimado y datos del cliente.
 - [x] `2.4` Vincular el botón de consulta rápida para abrir WhatsApp con el mensaje pre-cargado.
-- [ ] `2.5` Validar comportamiento responsive en dispositivos móviles (Android / iOS).
+- [ ] `2.5` Validar comportamiento responsive en dispositivos móviles (Android / iOS). *(Responsive + menú hamburguesa ya implementados; queda validar en el celular real.)*
 
 ---
 

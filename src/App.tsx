@@ -65,6 +65,7 @@ function buildMsg(cart: Record<string, number>) {
 export default function App() {
   const [cart, setCart] = useState<Record<string, number>>({ huevos: 0, hembras: 0, machos: 0 });
   const [scrolled, setScrolled] = useState(false);
+  const [menuAbierto, setMenuAbierto] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -92,7 +93,7 @@ export default function App() {
           right: 0,
           zIndex: 50,
           transition: "all 0.3s ease",
-          backgroundColor: scrolled ? "rgba(248,235,219,0.96)" : "transparent",
+          backgroundColor: (scrolled || menuAbierto) ? "rgba(248,235,219,0.96)" : "transparent",
           backdropFilter: scrolled ? "blur(12px)" : "none",
           paddingTop: scrolled ? "14px" : "22px",
           paddingBottom: scrolled ? "14px" : "22px",
@@ -103,7 +104,7 @@ export default function App() {
           <a href="#" className="font-serif" style={{ fontSize: "1.25rem", color: "#714d25", textDecoration: "none", letterSpacing: "-0.01em" }}>
             Hogar de <em>Codornices</em>
           </a>
-          <nav style={{ display: "flex", alignItems: "center", gap: "32px" }} className="hidden-mobile">
+          <nav className="nav-desktop" style={{ display: "flex", alignItems: "center", gap: "32px" }}>
             {["#productos|Productos", "#pedido|Mi pedido", "#contacto|Contacto"].map((item) => {
               const [href, label] = item.split("|");
               return (
@@ -114,6 +115,11 @@ export default function App() {
               Instagram
             </a>
           </nav>
+          <button className={`nav-toggle${menuAbierto ? " open" : ""}`} onClick={() => setMenuAbierto(!menuAbierto)} aria-label="Abrir menú" aria-expanded={menuAbierto}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
           <a href={waSimple} target="_blank" rel="noopener"
             style={{ backgroundColor: "#714d25", color: "#f8ebdb", textDecoration: "none", fontSize: "0.8125rem", fontWeight: 600, padding: "9px 20px", borderRadius: "999px", letterSpacing: "0.02em", transition: "opacity 0.2s, transform 0.2s" }}
             onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.88"; e.currentTarget.style.transform = "translateY(-1px)"; }}
@@ -121,13 +127,25 @@ export default function App() {
             WhatsApp ↗
           </a>
         </div>
+        {menuAbierto && (
+          <div className="nav-mobile">
+            {["#productos|Productos", "#pedido|Mi pedido", "#contacto|Contacto"].map((item) => {
+              const [href, label] = item.split("|");
+              return (
+                <a key={href} href={href} onClick={() => setMenuAbierto(false)}>{label}</a>
+              );
+            })}
+            <a href="https://www.instagram.com/hogar_de_codornices/" target="_blank" rel="noopener" onClick={() => setMenuAbierto(false)}>Instagram</a>
+            <a href={waSimple} target="_blank" rel="noopener" className="nav-mobile-wa" onClick={() => setMenuAbierto(false)}>WhatsApp ↗</a>
+          </div>
+        )}
       </header>
 
       {/* ── HERO ── */}
       <section style={{ paddingTop: "96px", minHeight: "92vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "40px 24px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "64px", alignItems: "center", width: "100%" }}>
+        <div className="grid-hero" style={{ maxWidth: "1200px", margin: "0 auto", padding: "40px 24px", width: "100%" }}>
 
-          <div>
+          <div className="hero-text">
             <p className="font-mono" style={{ fontSize: "0.7rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#a8682f", marginBottom: "24px" }}>
               Granja familiar · Ituzaingó, Bs. As.
             </p>
@@ -137,7 +155,7 @@ export default function App() {
             <p style={{ fontSize: "1.0625rem", lineHeight: 1.7, color: "#5a3a1a", opacity: 0.82, marginBottom: "44px", maxWidth: "420px" }}>
               Producción artesanal con cuidado familiar. Pedidos directos por WhatsApp, entrega coordinada en Ituzaingó y alrededores.
             </p>
-            <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+            <div className="hero-actions-inline" style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
               <a href="#productos"
                 style={{ backgroundColor: "#714d25", color: "#f8ebdb", textDecoration: "none", fontWeight: 600, fontSize: "0.9rem", padding: "14px 28px", borderRadius: "999px", letterSpacing: "0.02em", transition: "opacity 0.2s, transform 0.2s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.9"; e.currentTarget.style.transform = "translateY(-2px)"; }}
@@ -153,7 +171,7 @@ export default function App() {
             </div>
           </div>
 
-          <div style={{ position: "relative", height: "560px" }}>
+          <div className="hero-media" style={{ position: "relative" }}>
             <div style={{ position: "absolute", inset: 0, top: "16px", borderRadius: "2.5rem", overflow: "hidden", backgroundColor: "#e8d5bc" }}>
               <img
                 src="https://images.unsplash.com/photo-1641070260526-6b91c010b6d6?w=800&h=900&fit=crop&auto=format"
@@ -166,7 +184,7 @@ export default function App() {
               <p className="font-serif" style={{ fontSize: "1.75rem", fontWeight: 700, color: "#714d25", lineHeight: 1 }}>100%</p>
               <p className="font-mono" style={{ fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#5a3a1a", marginTop: "4px" }}>Natural & Fresco</p>
             </div>
-            <div style={{ position: "absolute", top: "36px", right: "-12px", zIndex: 10, backgroundColor: "#714d25", borderRadius: "1rem", padding: "14px 18px", boxShadow: "0 8px 24px rgba(44,26,14,0.25)" }}>
+            <div className="hero-badge-zona" style={{ position: "absolute", top: "36px", zIndex: 10, backgroundColor: "#714d25", borderRadius: "1rem", padding: "14px 18px", boxShadow: "0 8px 24px rgba(44,26,14,0.25)" }}>
               <p className="font-mono" style={{ fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#e8d5bc", marginBottom: "4px" }}>Zona de entrega</p>
               <p style={{ fontSize: "0.8rem", fontWeight: 600, color: "#f8ebdb" }}>Ituzaingó, Bs. As.</p>
             </div>
@@ -189,18 +207,18 @@ export default function App() {
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "28px" }}>
+          <div className="grid-productos">
             {PRODUCTS.map((p) => (
               <article key={p.id}
                 style={{ backgroundColor: "#fff", borderRadius: "2rem", overflow: "hidden", boxShadow: "0 2px 16px rgba(44,26,14,0.07)", transition: "box-shadow 0.3s, transform 0.3s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.boxShadow = "0 8px 40px rgba(44,26,14,0.14)"; e.currentTarget.style.transform = "translateY(-4px)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "0 2px 16px rgba(44,26,14,0.07)"; e.currentTarget.style.transform = "translateY(0)"; }}>
-                <div style={{ height: "260px", overflow: "hidden", backgroundColor: "#e8d5bc" }}>
+                <div className="card-media" style={{ overflow: "hidden", backgroundColor: "#e8d5bc" }}>
                   <img src={p.img} alt={p.alt} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }}
                     onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.06)")}
                     onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")} />
                 </div>
-                <div style={{ padding: "28px" }}>
+                <div className="card-padding">
                   <h3 className="font-serif" style={{ fontSize: "1.5rem", color: "#2c1a0e", marginBottom: "8px" }}>{p.name}</h3>
                   <p style={{ fontSize: "0.875rem", color: "#5a3a1a", opacity: 0.72, lineHeight: 1.6, marginBottom: "20px" }}>{p.desc}</p>
                   <p className="font-serif" style={{ fontSize: "2rem", fontWeight: 700, color: "#714d25", lineHeight: 1 }}>{fmt(p.price)}</p>
@@ -251,7 +269,7 @@ export default function App() {
             </h2>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "64px", alignItems: "start" }}>
+          <div className="grid-resumen">
             <div>
               {!hasItems ? (
                 <p style={{ fontSize: "1rem", color: "#e8d5bc", opacity: 0.5, fontStyle: "italic" }}>
@@ -293,7 +311,7 @@ export default function App() {
                     <p className="font-mono" style={{ fontSize: "0.7rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#e8d5bc", opacity: 0.55 }}>
                       Total estimado
                     </p>
-                    <p className="font-serif" style={{ fontSize: "2.75rem", fontWeight: 700, color: "#f8ebdb", letterSpacing: "-0.02em" }}>
+                    <p className="font-serif resumen-total" style={{ fontWeight: 700, color: "#f8ebdb", letterSpacing: "-0.02em" }}>
                       {fmt(total)}
                     </p>
                   </div>
@@ -301,7 +319,7 @@ export default function App() {
               )}
             </div>
 
-            <div style={{ backgroundColor: "rgba(248,235,219,0.07)", borderRadius: "2rem", padding: "40px", border: "1px solid rgba(248,235,219,0.1)" }}>
+            <div className="resumen-card-caja" style={{ backgroundColor: "rgba(248,235,219,0.07)", borderRadius: "2rem", border: "1px solid rgba(248,235,219,0.1)" }}>
               <div style={{ marginBottom: "32px" }}>
                 <p className="font-serif" style={{ fontSize: "1.375rem", color: "#f8ebdb", marginBottom: "12px" }}>
                   ¿Listo para pedir?
@@ -355,7 +373,7 @@ export default function App() {
             </h2>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
+          <div className="grid-contacto">
             <div>
               {[
                 { label: "Negocio", value: "Hogar de Codornices", href: undefined },
@@ -380,7 +398,7 @@ export default function App() {
               ))}
             </div>
 
-            <div style={{ position: "relative", height: "420px", borderRadius: "2.5rem", overflow: "hidden", backgroundColor: "#e8d5bc" }}>
+            <div className="contacto-media" style={{ position: "relative", borderRadius: "2.5rem", overflow: "hidden", backgroundColor: "#e8d5bc" }}>
               <img
                 src="https://images.unsplash.com/photo-1711714096280-1fd5d63b9ebe?w=700&h=500&fit=crop&auto=format"
                 alt="Codornices del Hogar de Codornices"
@@ -434,11 +452,6 @@ export default function App() {
         </svg>
       </a>
 
-      <style>{`
-        @media (max-width: 900px) {
-          .hidden-mobile { display: none !important; }
-        }
-      `}</style>
     </div>
   );
 }
