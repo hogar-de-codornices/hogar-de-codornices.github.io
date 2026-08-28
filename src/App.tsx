@@ -147,7 +147,7 @@ export default function App() {
 
           <div className="hero-text">
             <p className="font-mono" style={{ fontSize: "0.7rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#a8682f", marginBottom: "24px" }}>
-              Granja familiar · Ituzaingó, Bs. As.
+              Granja familiar · Buenos Aires
             </p>
             <h1 className="font-serif" style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)", lineHeight: 1.04, color: "#2c1a0e", marginBottom: "28px", letterSpacing: "-0.02em" }}>
               Huevos y<br />codornices<br /><em style={{ color: "#714d25" }}>del hogar.</em>
@@ -186,7 +186,7 @@ export default function App() {
             </div>
             <div className="hero-badge-zona" style={{ position: "absolute", top: "36px", zIndex: 10, backgroundColor: "#714d25", borderRadius: "1rem", padding: "14px 18px", boxShadow: "0 8px 24px rgba(44,26,14,0.25)" }}>
               <p className="font-mono" style={{ fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#e8d5bc", marginBottom: "4px" }}>Zona de entrega</p>
-              <p style={{ fontSize: "0.8rem", fontWeight: 600, color: "#f8ebdb" }}>Ituzaingó, Bs. As.</p>
+              <p style={{ fontSize: "0.8rem", fontWeight: 600, color: "#f8ebdb" }}>Ituzaingó y Buenos Aires</p>
             </div>
           </div>
         </div>
