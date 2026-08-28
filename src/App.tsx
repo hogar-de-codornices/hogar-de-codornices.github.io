@@ -57,7 +57,7 @@ function buildMsg(cart: Record<string, number>) {
       "",
       `Total estimado: ${fmt(total)}`,
       "",
-      "¿Podemos coordinar la entrega en Ituzaingó? ¡Gracias! 🥚",
+      "¿Podemos coordinar la entrega en Buenos Aires? ¡Gracias! 🥚",
     ].join("\n")
   );
 }
@@ -153,7 +153,7 @@ export default function App() {
               Huevos y<br />codornices<br /><em style={{ color: "#714d25" }}>del hogar.</em>
             </h1>
             <p style={{ fontSize: "1.0625rem", lineHeight: 1.7, color: "#5a3a1a", opacity: 0.82, marginBottom: "44px", maxWidth: "420px" }}>
-              Producción artesanal con cuidado familiar. Pedidos directos por WhatsApp, entrega coordinada en Ituzaingó y alrededores.
+              Producción artesanal con cuidado familiar. Pedidos directos por WhatsApp, entrega coordinada en Buenos Aires.
             </p>
             <div className="hero-actions-inline" style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
               <a href="#productos"
@@ -186,7 +186,7 @@ export default function App() {
             </div>
             <div className="hero-badge-zona" style={{ position: "absolute", top: "36px", zIndex: 10, backgroundColor: "#714d25", borderRadius: "1rem", padding: "14px 18px", boxShadow: "0 8px 24px rgba(44,26,14,0.25)" }}>
               <p className="font-mono" style={{ fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#e8d5bc", marginBottom: "4px" }}>Zona de entrega</p>
-              <p style={{ fontSize: "0.8rem", fontWeight: 600, color: "#f8ebdb" }}>Ituzaingó y Buenos Aires</p>
+              <p style={{ fontSize: "0.8rem", fontWeight: 600, color: "#f8ebdb" }}>Buenos Aires</p>
             </div>
           </div>
         </div>
@@ -377,7 +377,7 @@ export default function App() {
             <div>
               {[
                 { label: "Negocio", value: "Hogar de Codornices", href: undefined },
-                { label: "Zona de entrega", value: "Ituzaingó, Buenos Aires y alrededores", href: undefined },
+                { label: "Zona de entrega", value: "Buenos Aires y alrededores", href: undefined },
                 { label: "WhatsApp", value: "+54 9 11 5691-6710", href: waSimple },
                 { label: "Instagram", value: "@hogar_de_codornices", href: "https://www.instagram.com/hogar_de_codornices/" },
               ].map((item) => (
@@ -426,7 +426,7 @@ export default function App() {
       <footer style={{ borderTop: "1px solid rgba(113,77,37,0.15)", padding: "36px 0" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
           <p className="font-serif" style={{ fontSize: "1.125rem", fontStyle: "italic", color: "#714d25" }}>Hogar de Codornices</p>
-          <p style={{ fontSize: "0.8125rem", color: "#5a3a1a", opacity: 0.55 }}>Ituzaingó, Buenos Aires, Argentina</p>
+          <p style={{ fontSize: "0.8125rem", color: "#5a3a1a", opacity: 0.55 }}>Buenos Aires, Argentina</p>
           <div style={{ display: "flex", gap: "24px" }}>
             {[
               { label: "Instagram", href: "https://www.instagram.com/hogar_de_codornices/" },
