@@ -75,7 +75,7 @@ const PRODUCTS: {
       { type: "img", src: "machos/3.jpeg?v=2", alt: "Codorniz macho" },
       { type: "img", src: "machos/4.jpeg?v=2", alt: "Codorniz macho" },
       { type: "img", src: "machos/6.jpeg?v=2", alt: "Codorniz macho" },
-      { type: "video", src: "machos/video1.mp4?v=2", alt: "Video de codornices machos" },
+      { type: "video", src: "machos/video1.mp4?v=3", alt: "Video de codornices machos" },
     ],
   },
 ];
