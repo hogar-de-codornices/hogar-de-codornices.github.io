@@ -576,7 +576,7 @@ export default function App() {
               style={{ flexShrink: 1, borderRadius: "2rem", overflow: "hidden", backgroundColor: "#000", boxShadow: "0 12px 48px rgba(0,0,0,0.4)", aspectRatio: "9 / 16", height: "min(640px, 62vh)", width: "auto", maxWidth: "100%", cursor: "zoom-in" }}>
               <video
                 key={criaderoIdx}
-                src={`video jaula con codornices/${criaderoIdx + 1}.mp4?v=2`}
+                src={`video jaula con codornices/${criaderoIdx + 1}.mp4?v=3`}
                 autoPlay
                 muted
                 loop
@@ -646,7 +646,7 @@ export default function App() {
             <div style={{ borderRadius: "1.5rem", overflow: "hidden", backgroundColor: "#000", aspectRatio: "9 / 16", height: "min(78vh, 760px)", width: "auto" }}>
               <video
                 key={criaderoIdx}
-                src={`video jaula con codornices/${criaderoIdx + 1}.mp4?v=2`}
+                src={`video jaula con codornices/${criaderoIdx + 1}.mp4?v=3`}
                 autoPlay
                 muted
                 loop
