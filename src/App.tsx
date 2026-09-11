@@ -114,6 +114,7 @@ export default function App() {
     () => PRODUCTS.reduce((acc, p) => ({ ...acc, [p.id]: 0 }), {})
   );
   const [slide, setSlide] = useState<Record<string, number>>({});
+  const [criaderoIdx, setCriaderoIdx] = useState(0);
   const [lightbox, setLightbox] = useState<{ p: (typeof PRODUCTS)[number]; idx: number } | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [menuAbierto, setMenuAbierto] = useState(false);
@@ -540,18 +541,39 @@ export default function App() {
               Así criamos, día a día, con cuidado familiar y las codornices en su ambiente.
             </p>
           </div>
-          <div style={{ borderRadius: "2.5rem", overflow: "hidden", backgroundColor: "#000", boxShadow: "0 12px 48px rgba(0,0,0,0.4)" }}>
-            <video
-              src="video jaula con codornices/1.mp4?v=2"
-              autoPlay
-              muted
-              loop
-              playsInline
-              style={{ width: "100%", display: "block", aspectRatio: "16 / 9", objectFit: "cover" }}
-            />
+          <div className="video-carousel" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "20px" }}>
+            <button
+              aria-label="Video anterior"
+              onClick={() => setCriaderoIdx((i) => (i - 1 + 2) % 2)}
+              className="vc-arrow"
+              style={{ flexShrink: 0, width: "48px", height: "48px", borderRadius: "50%", border: "2px solid rgba(248,235,219,0.3)", backgroundColor: "rgba(248,235,219,0.08)", color: "#f8ebdb", fontSize: "1.6rem", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background-color 0.2s, transform 0.2s" }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "rgba(113,77,37,0.9)"; e.currentTarget.style.transform = "scale(1.08)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "rgba(248,235,219,0.08)"; e.currentTarget.style.transform = "scale(1)"; }}>
+              ‹
+            </button>
+            <div style={{ flexShrink: 1, borderRadius: "2rem", overflow: "hidden", backgroundColor: "#000", boxShadow: "0 12px 48px rgba(0,0,0,0.4)", aspectRatio: "9 / 16", height: "min(640px, 62vh)", width: "auto", maxWidth: "100%" }}>
+              <video
+                key={criaderoIdx}
+                src={`video jaula con codornices/${criaderoIdx + 1}.mp4?v=2`}
+                autoPlay
+                muted
+                loop
+                playsInline
+                style={{ width: "100%", height: "100%", display: "block", objectFit: "cover" }}
+              />
+            </div>
+            <button
+              aria-label="Video siguiente"
+              onClick={() => setCriaderoIdx((i) => (i + 1) % 2)}
+              className="vc-arrow"
+              style={{ flexShrink: 0, width: "48px", height: "48px", borderRadius: "50%", border: "2px solid rgba(248,235,219,0.3)", backgroundColor: "rgba(248,235,219,0.08)", color: "#f8ebdb", fontSize: "1.6rem", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background-color 0.2s, transform 0.2s" }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "rgba(113,77,37,0.9)"; e.currentTarget.style.transform = "scale(1.08)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "rgba(248,235,219,0.08)"; e.currentTarget.style.transform = "scale(1)"; }}>
+              ›
+            </button>
           </div>
           <p style={{ textAlign: "center", fontSize: "0.8125rem", color: "#e8d5bc", opacity: 0.5, marginTop: "20px" }}>
-            Video real del criadero del Hogar de Codornices.
+            Videos reales del criadero del Hogar de Codornices · {criaderoIdx + 1} / 2
           </p>
         </div>
       </section>
