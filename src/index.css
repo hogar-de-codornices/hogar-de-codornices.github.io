@@ -269,6 +269,9 @@ body {
   .video-carousel > div {
     height: min(480px, 55vh) !important;
   }
+  .lb-stage-video > div {
+    height: min(55vh, 600px) !important;
+  }
   .vc-arrow {
     width: 40px !important;
     height: 40px !important;

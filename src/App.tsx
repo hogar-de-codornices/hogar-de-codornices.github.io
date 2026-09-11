@@ -115,25 +115,35 @@ export default function App() {
   );
   const [slide, setSlide] = useState<Record<string, number>>({});
   const [criaderoIdx, setCriaderoIdx] = useState(0);
+  const [criaderoZoom, setCriaderoZoom] = useState(false);
   const [lightbox, setLightbox] = useState<{ p: (typeof PRODUCTS)[number]; idx: number } | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [menuAbierto, setMenuAbierto] = useState(false);
 
   useEffect(() => {
-    if (!lightbox) return;
+    if (!lightbox && !criaderoZoom) return;
     document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => {
-      if (!lightbox) return;
-      if (e.key === "Escape") setLightbox(null);
-      if (e.key === "ArrowRight") setLightbox((l) => l && { ...l, idx: (l.idx + 1) % l.p.media.length });
-      if (e.key === "ArrowLeft") setLightbox((l) => l && { ...l, idx: (l.idx - 1 + l.p.media.length) % l.p.media.length });
+      if (e.key === "Escape") {
+        setLightbox(null);
+        setCriaderoZoom(false);
+        return;
+      }
+      if (e.key === "ArrowRight") {
+        if (criaderoZoom) setCriaderoIdx((i) => (i + 1) % 2);
+        else setLightbox((l) => l && { ...l, idx: (l.idx + 1) % l.p.media.length });
+      }
+      if (e.key === "ArrowLeft") {
+        if (criaderoZoom) setCriaderoIdx((i) => (i - 1 + 2) % 2);
+        else setLightbox((l) => l && { ...l, idx: (l.idx - 1 + l.p.media.length) % l.p.media.length });
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
-  }, [lightbox]);
+  }, [lightbox, criaderoZoom]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -551,7 +561,9 @@ export default function App() {
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "rgba(248,235,219,0.08)"; e.currentTarget.style.transform = "scale(1)"; }}>
               ‹
             </button>
-            <div style={{ flexShrink: 1, borderRadius: "2rem", overflow: "hidden", backgroundColor: "#000", boxShadow: "0 12px 48px rgba(0,0,0,0.4)", aspectRatio: "9 / 16", height: "min(640px, 62vh)", width: "auto", maxWidth: "100%" }}>
+            <div
+              onClick={() => setCriaderoZoom(true)}
+              style={{ flexShrink: 1, borderRadius: "2rem", overflow: "hidden", backgroundColor: "#000", boxShadow: "0 12px 48px rgba(0,0,0,0.4)", aspectRatio: "9 / 16", height: "min(640px, 62vh)", width: "auto", maxWidth: "100%", cursor: "zoom-in" }}>
               <video
                 key={criaderoIdx}
                 src={`video jaula con codornices/${criaderoIdx + 1}.mp4?v=2`}
@@ -559,7 +571,7 @@ export default function App() {
                 muted
                 loop
                 playsInline
-                style={{ width: "100%", height: "100%", display: "block", objectFit: "cover" }}
+                style={{ width: "100%", height: "100%", display: "block", objectFit: "cover", pointerEvents: "none" }}
               />
             </div>
             <button
@@ -598,6 +610,60 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* ── LIGHTBOX CRIADERO ── */}
+      {criaderoZoom && (
+        <div
+          onClick={() => setCriaderoZoom(false)}
+          style={{ position: "fixed", inset: 0, zIndex: 100, backgroundColor: "rgba(20,10,4,0.94)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "16px", padding: "20px" }}>
+          <div onClick={(e) => e.stopPropagation()} className="lb-stage lb-stage-video" style={{ position: "relative", display: "flex", alignItems: "center", gap: "20px" }}>
+            <button
+              className="lb-arrow"
+              aria-label="Video anterior"
+              onClick={(e) => { e.stopPropagation(); setCriaderoIdx((i) => (i - 1 + 2) % 2); }}
+              style={{ flexShrink: 0, width: "56px", height: "56px", borderRadius: "50%", border: "2px solid rgba(248,235,219,0.3)", backgroundColor: "rgba(44,26,14,0.5)", color: "#f8ebdb", fontSize: "1.9rem", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background-color 0.2s, transform 0.2s" }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "rgba(113,77,37,0.9)"; e.currentTarget.style.transform = "scale(1.08)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "rgba(44,26,14,0.5)"; e.currentTarget.style.transform = "scale(1)"; }}>
+              ‹
+            </button>
+            <div style={{ borderRadius: "1.5rem", overflow: "hidden", backgroundColor: "#000", aspectRatio: "9 / 16", height: "min(78vh, 760px)", width: "auto" }}>
+              <video
+                key={criaderoIdx}
+                src={`video jaula con codornices/${criaderoIdx + 1}.mp4?v=2`}
+                autoPlay
+                muted
+                loop
+                playsInline
+                style={{ width: "100%", height: "100%", display: "block", objectFit: "cover" }}
+              />
+            </div>
+            <button
+              className="lb-arrow"
+              aria-label="Video siguiente"
+              onClick={(e) => { e.stopPropagation(); setCriaderoIdx((i) => (i + 1) % 2); }}
+              style={{ flexShrink: 0, width: "56px", height: "56px", borderRadius: "50%", border: "2px solid rgba(248,235,219,0.3)", backgroundColor: "rgba(44,26,14,0.5)", color: "#f8ebdb", fontSize: "1.9rem", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background-color 0.2s, transform 0.2s" }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "rgba(113,77,37,0.9)"; e.currentTarget.style.transform = "scale(1.08)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "rgba(44,26,14,0.5)"; e.currentTarget.style.transform = "scale(1)"; }}>
+              ›
+            </button>
+          </div>
+
+          <div onClick={(e) => e.stopPropagation()} style={{ textAlign: "center" }}>
+            <p className="font-serif" style={{ fontSize: "1.125rem", color: "#f8ebdb", marginBottom: "6px" }}>Nuestro criadero</p>
+            <p style={{ fontSize: "0.8125rem", color: "#e8d5bc", opacity: 0.6 }}>
+              {criaderoIdx + 1} / 2 · Video real del criadero · ESC para cerrar
+            </p>
+            <button
+              aria-label="Cerrar"
+              onClick={() => setCriaderoZoom(false)}
+              style={{ position: "fixed", top: "18px", right: "18px", width: "48px", height: "48px", borderRadius: "50%", border: "2px solid rgba(248,235,219,0.3)", backgroundColor: "rgba(44,26,14,0.6)", color: "#f8ebdb", fontSize: "1.5rem", lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10, transition: "background-color 0.2s" }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(113,77,37,0.9)")}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "rgba(44,26,14,0.6)")}>
+              ×
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* ── LIGHTBOX ── */}
       {lightbox && (
