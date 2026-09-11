@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 type MediaItem = { type: "img" | "video"; src: string; alt?: string; pos?: string };
 
@@ -157,6 +157,17 @@ export default function App() {
 
   const adjust = (id: string, d: number) =>
     setCart((prev) => ({ ...prev, [id]: Math.max(0, (prev[id] || 0) + d) }));
+
+  const touchX = useRef<number | null>(null);
+  const swipeHandlers = (next: () => void, prev: () => void) => ({
+    onTouchStart: (e: React.TouchEvent) => { touchX.current = e.touches[0].clientX; },
+    onTouchEnd: (e: React.TouchEvent) => {
+      if (touchX.current === null) return;
+      const dx = e.changedTouches[0].clientX - touchX.current;
+      touchX.current = null;
+      if (Math.abs(dx) > 40) (dx < 0 ? next : prev)();
+    },
+  });
 
   return (
     <div style={{ backgroundColor: "#f8ebdb", color: "#2c1a0e", minHeight: "100vh" }}>
@@ -615,7 +626,14 @@ export default function App() {
         <div
           onClick={() => setCriaderoZoom(false)}
           style={{ position: "fixed", inset: 0, zIndex: 100, backgroundColor: "rgba(20,10,4,0.94)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "16px", padding: "20px" }}>
-          <div onClick={(e) => e.stopPropagation()} className="lb-stage lb-stage-video" style={{ position: "relative", display: "flex", alignItems: "center", gap: "20px" }}>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="lb-stage lb-stage-video"
+            style={{ position: "relative", display: "flex", alignItems: "center", gap: "20px" }}
+            {...swipeHandlers(
+              () => setCriaderoIdx((i) => (i + 1) % 2),
+              () => setCriaderoIdx((i) => (i - 1 + 2) % 2)
+            )}>
             <button
               className="lb-arrow"
               aria-label="Video anterior"
@@ -669,7 +687,16 @@ export default function App() {
         <div
           onClick={() => setLightbox(null)}
           style={{ position: "fixed", inset: 0, zIndex: 100, backgroundColor: "rgba(20,10,4,0.92)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "16px", padding: "20px" }}>
-          <div onClick={(e) => e.stopPropagation()} className="lb-stage" style={{ position: "relative", width: "min(1000px, 100%)", maxHeight: "82vh" }}>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="lb-stage"
+            style={{ position: "relative", width: "min(1000px, 100%)", maxHeight: "82vh" }}
+            {...(lightbox.p.media.length > 1
+              ? swipeHandlers(
+                  () => setLightbox((l) => l && { ...l, idx: (l.idx + 1) % l.p.media.length }),
+                  () => setLightbox((l) => l && { ...l, idx: (l.idx - 1 + l.p.media.length) % l.p.media.length })
+                )
+              : {})}>
             <button
               aria-label="Cerrar"
               onClick={() => setLightbox(null)}
