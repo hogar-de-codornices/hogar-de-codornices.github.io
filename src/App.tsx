@@ -51,7 +51,7 @@ const PRODUCTS: {
   },
   {
     id: "hembras",
-    name: "Codornices hembras adultas",
+    name: "Codornices hembras",
     desc: "Ponedoras activas y saludables, listas para tu criadero o consumo familiar.",
     unit: "unidad",
     unitShort: "unidad",
