@@ -1,6 +1,17 @@
 import { useState, useEffect } from "react";
 
-const PRODUCTS = [
+type MediaItem = { type: "img" | "video"; src: string; alt?: string };
+
+const PRODUCTS: {
+  id: string;
+  name: string;
+  desc: string;
+  unit: string;
+  unitShort: string;
+  unitPlural: string;
+  price: number;
+  media: MediaItem[];
+}[] = [
   {
     id: "huevos",
     name: "Huevos comestibles orgánicos",
@@ -9,8 +20,10 @@ const PRODUCTS = [
     unitShort: "docena",
     unitPlural: "docenas",
     price: 4000,
-    img: "huevos/1.jpeg",
-    alt: "Huevos de codorniz frescos",
+    media: [
+      { type: "img", src: "huevos/1.jpeg", alt: "Huevos de codorniz frescos" },
+      { type: "img", src: "huevos/2.jpeg", alt: "Huevos de codorniz" },
+    ],
   },
   {
     id: "fertiles",
@@ -20,8 +33,10 @@ const PRODUCTS = [
     unitShort: "docena",
     unitPlural: "docenas",
     price: 6000,
-    img: "huevos/2.jpeg",
-    alt: "Huevos de codorniz para incubar",
+    media: [
+      { type: "img", src: "huevos/2.jpeg", alt: "Huevos de codorniz para incubar" },
+      { type: "img", src: "huevos/1.jpeg", alt: "Huevos de codorniz frescos" },
+    ],
   },
   {
     id: "polluelos",
@@ -31,8 +46,11 @@ const PRODUCTS = [
     unitShort: "unidad",
     unitPlural: "unidades",
     price: 6000,
-    img: "polluelos/1.jpg",
-    alt: "Polluelo de codorniz recién nacido",
+    media: [
+      { type: "img", src: "polluelos/1.jpg", alt: "Polluelo de codorniz recién nacido" },
+      { type: "img", src: "polluelos/2.jpeg", alt: "Polluelo de codorniz" },
+      { type: "img", src: "polluelos/3.jpeg", alt: "Polluelo de codorniz" },
+    ],
   },
   {
     id: "hembras",
@@ -42,8 +60,9 @@ const PRODUCTS = [
     unitShort: "unidad",
     unitPlural: "unidades",
     price: 12000,
-    img: "hembras/1.jpg",
-    alt: "Codorniz hembra en su entorno natural",
+    media: [
+      { type: "img", src: "hembras/1.jpg", alt: "Codorniz hembra en su entorno natural" },
+    ],
   },
   {
     id: "machos",
@@ -53,8 +72,14 @@ const PRODUCTS = [
     unitShort: "unidad",
     unitPlural: "unidades",
     price: 4000,
-    img: "machos/1.jpeg",
-    alt: "Codorniz macho posada en una rama",
+    media: [
+      { type: "img", src: "machos/1.jpeg", alt: "Codorniz macho" },
+      { type: "img", src: "machos/2.jpeg", alt: "Codorniz macho" },
+      { type: "img", src: "machos/3.jpeg", alt: "Codorniz macho" },
+      { type: "img", src: "machos/4.jpeg", alt: "Codorniz macho" },
+      { type: "img", src: "machos/6.jpeg", alt: "Codorniz macho" },
+      { type: "video", src: "machos/video1.mp4", alt: "Video de codornices machos" },
+    ],
   },
 ];
 
@@ -90,8 +115,26 @@ export default function App() {
   const [cart, setCart] = useState<Record<string, number>>(
     () => PRODUCTS.reduce((acc, p) => ({ ...acc, [p.id]: 0 }), {})
   );
+  const [slide, setSlide] = useState<Record<string, number>>({});
+  const [lightbox, setLightbox] = useState<{ p: (typeof PRODUCTS)[number]; idx: number } | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [menuAbierto, setMenuAbierto] = useState(false);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (!lightbox) return;
+      if (e.key === "Escape") setLightbox(null);
+      if (e.key === "ArrowRight") setLightbox((l) => l && { ...l, idx: (l.idx + 1) % l.p.media.length });
+      if (e.key === "ArrowLeft") setLightbox((l) => l && { ...l, idx: (l.idx - 1 + l.p.media.length) % l.p.media.length });
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [lightbox]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -239,10 +282,47 @@ export default function App() {
                 style={{ backgroundColor: "#fff", borderRadius: "2rem", overflow: "hidden", boxShadow: "0 2px 16px rgba(44,26,14,0.07)", transition: "box-shadow 0.3s, transform 0.3s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.boxShadow = "0 8px 40px rgba(44,26,14,0.14)"; e.currentTarget.style.transform = "translateY(-4px)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "0 2px 16px rgba(44,26,14,0.07)"; e.currentTarget.style.transform = "translateY(0)"; }}>
-                <div className="card-media" style={{ overflow: "hidden", backgroundColor: "#e8d5bc" }}>
-                  <img src={p.img} alt={p.alt} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.06)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")} />
+                <div className="card-media" style={{ position: "relative", overflow: "hidden", backgroundColor: "#e8d5bc", cursor: "zoom-in" }}
+                  onClick={() => setLightbox({ p, idx: slide[p.id] || 0 })}>
+                  {p.media[slide[p.id] || 0]?.type === "video" ? (
+                    <video
+                      src={p.media[slide[p.id] || 0].src}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }}
+                      onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.06)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                    />
+                  ) : (
+                    <img src={p.media[slide[p.id] || 0]?.src} alt={p.media[slide[p.id] || 0]?.alt} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }}
+                      onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.06)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")} />
+                  )}
+                  {p.media.length > 1 && (
+                    <>
+                      <button
+                        aria-label="Foto anterior"
+                        onClick={(e) => { e.stopPropagation(); setSlide((s) => ({ ...s, [p.id]: ((s[p.id] || 0) - 1 + p.media.length) % p.media.length })); }}
+                        style={{ position: "absolute", left: "10px", top: "50%", transform: "translateY(-50%)", zIndex: 5, width: "34px", height: "34px", borderRadius: "50%", border: "none", backgroundColor: "rgba(44,26,14,0.45)", color: "#f8ebdb", fontSize: "1.1rem", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background-color 0.2s" }}
+                        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(44,26,14,0.75)")}
+                        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "rgba(44,26,14,0.45)")}>
+                        ‹
+                      </button>
+                      <button
+                        aria-label="Foto siguiente"
+                        onClick={(e) => { e.stopPropagation(); setSlide((s) => ({ ...s, [p.id]: ((s[p.id] || 0) + 1) % p.media.length })); }}
+                        style={{ position: "absolute", right: "10px", top: "50%", transform: "translateY(-50%)", zIndex: 5, width: "34px", height: "34px", borderRadius: "50%", border: "none", backgroundColor: "rgba(44,26,14,0.45)", color: "#f8ebdb", fontSize: "1.1rem", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background-color 0.2s" }}
+                        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(44,26,14,0.75)")}
+                        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "rgba(44,26,14,0.45)")}>
+                        ›
+                      </button>
+                      <div style={{ position: "absolute", bottom: "10px", right: "12px", zIndex: 5, backgroundColor: "rgba(44,26,14,0.55)", color: "#f8ebdb", fontSize: "0.7rem", fontWeight: 600, padding: "3px 10px", borderRadius: "999px", pointerEvents: "none" }}>
+                        {(slide[p.id] || 0) + 1} / {p.media.length}
+                      </div>
+                    </>
+                  )}
                 </div>
                 <div className="card-padding">
                   <h3 className="font-serif" style={{ fontSize: "1.5rem", color: "#2c1a0e", marginBottom: "8px" }}>{p.name}</h3>
@@ -498,6 +578,71 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* ── LIGHTBOX ── */}
+      {lightbox && (
+        <div
+          onClick={() => setLightbox(null)}
+          style={{ position: "fixed", inset: 0, zIndex: 100, backgroundColor: "rgba(20,10,4,0.92)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "16px", padding: "20px" }}>
+          <div onClick={(e) => e.stopPropagation()} className="lb-stage" style={{ position: "relative", width: "min(1000px, 100%)", maxHeight: "82vh" }}>
+            <button
+              aria-label="Cerrar"
+              onClick={() => setLightbox(null)}
+              style={{ position: "fixed", top: "18px", right: "18px", width: "48px", height: "48px", borderRadius: "50%", border: "2px solid rgba(248,235,219,0.3)", backgroundColor: "rgba(44,26,14,0.6)", color: "#f8ebdb", fontSize: "1.5rem", lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10, transition: "background-color 0.2s" }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "rgba(113,77,37,0.9)")}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "rgba(44,26,14,0.6)")}>
+              ×
+            </button>
+            {lightbox.p.media[lightbox.idx]?.type === "video" ? (
+              <video
+                src={lightbox.p.media[lightbox.idx].src}
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
+                style={{ width: "100%", maxHeight: "82vh", display: "block", objectFit: "contain", borderRadius: "1.5rem", backgroundColor: "#000" }}
+              />
+            ) : (
+              <img
+                src={lightbox.p.media[lightbox.idx]?.src}
+                alt={lightbox.p.media[lightbox.idx]?.alt}
+                style={{ width: "100%", maxHeight: "82vh", display: "block", objectFit: "contain", borderRadius: "1.5rem", backgroundColor: "rgba(255,255,255,0.06)" }}
+              />
+            )}
+
+            {lightbox.p.media.length > 1 && (
+              <>
+                <button
+                  className="lb-arrow lb-prev"
+                  aria-label="Anterior"
+                  onClick={(e) => { e.stopPropagation(); setLightbox((l) => l && { ...l, idx: (l.idx - 1 + l.p.media.length) % l.p.media.length }); }}
+                  style={{ position: "absolute", left: "-56px", top: "50%", transform: "translateY(-50%)", width: "56px", height: "56px", borderRadius: "50%", border: "2px solid rgba(248,235,219,0.3)", backgroundColor: "rgba(44,26,14,0.5)", color: "#f8ebdb", fontSize: "1.9rem", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background-color 0.2s, transform 0.2s" }}
+                  onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "rgba(113,77,37,0.9)"; e.currentTarget.style.transform = "translateY(-50%) scale(1.08)"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "rgba(44,26,14,0.5)"; e.currentTarget.style.transform = "translateY(-50%)"; }}>
+                  ‹
+                </button>
+                <button
+                  className="lb-arrow lb-next"
+                  aria-label="Siguiente"
+                  onClick={(e) => { e.stopPropagation(); setLightbox((l) => l && { ...l, idx: (l.idx + 1) % l.p.media.length }); }}
+                  style={{ position: "absolute", right: "-56px", top: "50%", transform: "translateY(-50%)", width: "56px", height: "56px", borderRadius: "50%", border: "2px solid rgba(248,235,219,0.3)", backgroundColor: "rgba(44,26,14,0.5)", color: "#f8ebdb", fontSize: "1.9rem", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "background-color 0.2s, transform 0.2s" }}
+                  onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "rgba(113,77,37,0.9)"; e.currentTarget.style.transform = "translateY(-50%) scale(1.08)"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "rgba(44,26,14,0.5)"; e.currentTarget.style.transform = "translateY(-50%)"; }}>
+                  ›
+                </button>
+              </>
+            )}
+          </div>
+
+          <div onClick={(e) => e.stopPropagation()} style={{ textAlign: "center" }}>
+            <p className="font-serif" style={{ fontSize: "1.125rem", color: "#f8ebdb", marginBottom: "6px" }}>{lightbox.p.name}</p>
+            <p style={{ fontSize: "0.8125rem", color: "#e8d5bc", opacity: 0.6 }}>
+              {lightbox.idx + 1} / {lightbox.p.media.length} · Hacé click en la imagen o ESC para cerrar
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* ── FLOATING WA ── */}
       <a href={waSimple} target="_blank" rel="noopener" aria-label="Consultar por WhatsApp"

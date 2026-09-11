@@ -242,4 +242,25 @@ body {
   .grid-resumen .resumen-card-caja {
     padding: 28px !important;
   }
+
+  .lb-arrow {
+    position: static !important;
+    transform: none !important;
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 1.6rem !important;
+  }
+  .lb-stage {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    max-height: none !important;
+  }
+  .lb-stage img,
+  .lb-stage video {
+    width: 100% !important;
+    max-height: 60vh !important;
+  }
 }
