@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-type MediaItem = { type: "img" | "video"; src: string; alt?: string };
+type MediaItem = { type: "img" | "video"; src: string; alt?: string; pos?: string };
 
 const PRODUCTS: {
   id: string;
@@ -45,8 +45,7 @@ const PRODUCTS: {
     unitPlural: "unidades",
     price: 6000,
     media: [
-      { type: "img", src: "polluelos/1.jpg?v=2", alt: "Polluelo de codorniz recién nacido" },
-      { type: "img", src: "polluelos/2.jpeg?v=2", alt: "Polluelo de codorniz" },
+      { type: "img", src: "polluelos/1.jpg?v=2", alt: "Polluelo de codorniz recién nacido", pos: "center 75%" },
       { type: "img", src: "polluelos/3.jpeg?v=2", alt: "Polluelo de codorniz" },
     ],
   },
@@ -305,7 +304,7 @@ export default function App() {
                       onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
                     />
                   ) : (
-                    <img src={p.media[slide[p.id] || 0]?.src} alt={p.media[slide[p.id] || 0]?.alt} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }}
+                    <img src={p.media[slide[p.id] || 0]?.src} alt={p.media[slide[p.id] || 0]?.alt} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: p.media[slide[p.id] || 0]?.pos || "center", transition: "transform 0.5s ease" }}
                       onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.06)")}
                       onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")} />
                   )}
