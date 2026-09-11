@@ -32,9 +32,9 @@ Desarrollo de una landing page e-commerce interactiva para la venta de:
 ## 💰 Precios de referencia (a re-confirmar con mamá)
 - Huevos comestibles orgánicos (docena): **$4.000**
 - Huevos fértiles mix (docena): **$6.000**
-- Polluelos (unidad): **$3.500** *(estimado a confirmar)*
-- Codorniz hembra adulta (unidad): $9.000
-- Codorniz macho (unidad): $6.000
+- Polluelos (unidad): **$6.000**
+- Codorniz hembra adulta (unidad): **$12.000**
+- Codorniz macho (unidad): **$4.000**
 - Envío/entrega: **por cuenta del comprador** (ya informado en web y WhatsApp)
 
 ## 📸 Imágenes
