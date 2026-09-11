@@ -21,8 +21,7 @@ const PRODUCTS: {
     unitPlural: "docenas",
     price: 4000,
     media: [
-      { type: "img", src: "huevos/1.jpeg?v=2", alt: "Huevos de codorniz frescos" },
-      { type: "img", src: "huevos/2.jpeg?v=2", alt: "Huevos de codorniz" },
+      { type: "img", src: "huevos/comestible.jpeg?v=2", alt: "Huevos de codorniz frescos" },
     ],
   },
   {
@@ -34,8 +33,7 @@ const PRODUCTS: {
     unitPlural: "docenas",
     price: 6000,
     media: [
-      { type: "img", src: "huevos/2.jpeg?v=2", alt: "Huevos de codorniz para incubar" },
-      { type: "img", src: "huevos/1.jpeg?v=2", alt: "Huevos de codorniz frescos" },
+      { type: "img", src: "huevos/para encubar.jpeg?v=2", alt: "Huevos de codorniz para incubar" },
     ],
   },
   {
