@@ -45,7 +45,7 @@ const PRODUCTS: {
     unitPlural: "unidades",
     price: 6000,
     media: [
-      { type: "img", src: "polluelos/1.jpg?v=2", alt: "Polluelo de codorniz recién nacido", pos: "center 25%" },
+      { type: "img", src: "polluelos/1.jpg?v=2", alt: "Polluelo de codorniz recién nacido", pos: "center 0%" },
       { type: "img", src: "polluelos/3.jpeg?v=2", alt: "Polluelo de codorniz" },
     ],
   },
