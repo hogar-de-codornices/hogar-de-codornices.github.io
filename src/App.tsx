@@ -21,8 +21,8 @@ const PRODUCTS: {
     unitPlural: "docenas",
     price: 4000,
     media: [
-      { type: "img", src: "huevos/1.jpeg", alt: "Huevos de codorniz frescos" },
-      { type: "img", src: "huevos/2.jpeg", alt: "Huevos de codorniz" },
+      { type: "img", src: "huevos/1.jpeg?v=2", alt: "Huevos de codorniz frescos" },
+      { type: "img", src: "huevos/2.jpeg?v=2", alt: "Huevos de codorniz" },
     ],
   },
   {
@@ -34,8 +34,8 @@ const PRODUCTS: {
     unitPlural: "docenas",
     price: 6000,
     media: [
-      { type: "img", src: "huevos/2.jpeg", alt: "Huevos de codorniz para incubar" },
-      { type: "img", src: "huevos/1.jpeg", alt: "Huevos de codorniz frescos" },
+      { type: "img", src: "huevos/2.jpeg?v=2", alt: "Huevos de codorniz para incubar" },
+      { type: "img", src: "huevos/1.jpeg?v=2", alt: "Huevos de codorniz frescos" },
     ],
   },
   {
@@ -47,9 +47,9 @@ const PRODUCTS: {
     unitPlural: "unidades",
     price: 6000,
     media: [
-      { type: "img", src: "polluelos/1.jpg", alt: "Polluelo de codorniz recién nacido" },
-      { type: "img", src: "polluelos/2.jpeg", alt: "Polluelo de codorniz" },
-      { type: "img", src: "polluelos/3.jpeg", alt: "Polluelo de codorniz" },
+      { type: "img", src: "polluelos/1.jpg?v=2", alt: "Polluelo de codorniz recién nacido" },
+      { type: "img", src: "polluelos/2.jpeg?v=2", alt: "Polluelo de codorniz" },
+      { type: "img", src: "polluelos/3.jpeg?v=2", alt: "Polluelo de codorniz" },
     ],
   },
   {
@@ -61,7 +61,7 @@ const PRODUCTS: {
     unitPlural: "unidades",
     price: 12000,
     media: [
-      { type: "img", src: "hembras/1.jpg", alt: "Codorniz hembra en su entorno natural" },
+      { type: "img", src: "hembras/1.jpg?v=2", alt: "Codorniz hembra en su entorno natural" },
     ],
   },
   {
@@ -73,12 +73,12 @@ const PRODUCTS: {
     unitPlural: "unidades",
     price: 4000,
     media: [
-      { type: "img", src: "machos/1.jpeg", alt: "Codorniz macho" },
-      { type: "img", src: "machos/2.jpeg", alt: "Codorniz macho" },
-      { type: "img", src: "machos/3.jpeg", alt: "Codorniz macho" },
-      { type: "img", src: "machos/4.jpeg", alt: "Codorniz macho" },
-      { type: "img", src: "machos/6.jpeg", alt: "Codorniz macho" },
-      { type: "video", src: "machos/video1.mp4", alt: "Video de codornices machos" },
+      { type: "img", src: "machos/1.jpeg?v=2", alt: "Codorniz macho" },
+      { type: "img", src: "machos/2.jpeg?v=2", alt: "Codorniz macho" },
+      { type: "img", src: "machos/3.jpeg?v=2", alt: "Codorniz macho" },
+      { type: "img", src: "machos/4.jpeg?v=2", alt: "Codorniz macho" },
+      { type: "img", src: "machos/6.jpeg?v=2", alt: "Codorniz macho" },
+      { type: "video", src: "machos/video1.mp4?v=2", alt: "Video de codornices machos" },
     ],
   },
 ];
@@ -544,7 +544,7 @@ export default function App() {
           </div>
           <div style={{ borderRadius: "2.5rem", overflow: "hidden", backgroundColor: "#000", boxShadow: "0 12px 48px rgba(0,0,0,0.4)" }}>
             <video
-              src="video jaula con codornices/1.mp4"
+              src="video jaula con codornices/1.mp4?v=2"
               autoPlay
               muted
               loop
