@@ -9,8 +9,8 @@ const PRODUCTS = [
     unitShort: "docena",
     unitPlural: "docenas",
     price: 4000,
-    img: "https://images.unsplash.com/photo-1645218167710-356801f89a7b?w=600&h=480&fit=crop&auto=format",
-    alt: "Nido con huevos de codorniz frescos",
+    img: "huevos/1.jpeg",
+    alt: "Huevos de codorniz frescos",
   },
   {
     id: "fertiles",
@@ -20,8 +20,8 @@ const PRODUCTS = [
     unitShort: "docena",
     unitPlural: "docenas",
     price: 6000,
-    img: "https://images.unsplash.com/photo-1641070260526-6b91c010b6d6?w=600&h=480&fit=crop&auto=format",
-    alt: "Huevos de codorniz en nido para incubar",
+    img: "huevos/2.jpeg",
+    alt: "Huevos de codorniz para incubar",
   },
   {
     id: "polluelos",
@@ -31,7 +31,7 @@ const PRODUCTS = [
     unitShort: "unidad",
     unitPlural: "unidades",
     price: 6000,
-    img: "https://images.unsplash.com/photo-1546272989-40c92939c6c2?w=600&h=480&fit=crop&auto=format",
+    img: "polluelos/1.jpg",
     alt: "Polluelo de codorniz recién nacido",
   },
   {
@@ -42,7 +42,7 @@ const PRODUCTS = [
     unitShort: "unidad",
     unitPlural: "unidades",
     price: 12000,
-    img: "https://images.unsplash.com/photo-1781674459525-0b893b38f1eb?w=600&h=480&fit=crop&auto=format",
+    img: "hembras/1.jpg",
     alt: "Codorniz hembra en su entorno natural",
   },
   {
@@ -53,7 +53,7 @@ const PRODUCTS = [
     unitShort: "unidad",
     unitPlural: "unidades",
     price: 4000,
-    img: "https://images.unsplash.com/photo-1748929170058-2277f819ceeb?w=600&h=480&fit=crop&auto=format",
+    img: "machos/1.jpeg",
     alt: "Codorniz macho posada en una rama",
   },
 ];
@@ -445,6 +445,36 @@ export default function App() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── CRIADERO / VIDEO ── */}
+      <section id="criadero" style={{ padding: "96px 0", backgroundColor: "#2c1a0e" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 24px" }}>
+          <div style={{ marginBottom: "48px", textAlign: "center" }}>
+            <p className="font-mono" style={{ fontSize: "0.7rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#e8d5bc", opacity: 0.7, marginBottom: "16px" }}>
+              04 — Nuestro criadero
+            </p>
+            <h2 className="font-serif" style={{ fontSize: "clamp(2.25rem, 4vw, 3.25rem)", color: "#f8ebdb", letterSpacing: "-0.02em", marginBottom: "16px" }}>
+              Mirá cómo vivimos
+            </h2>
+            <p style={{ fontSize: "1rem", color: "#e8d5bc", opacity: 0.7, maxWidth: "480px", margin: "0 auto", lineHeight: 1.65 }}>
+              Así criamos, día a día, con cuidado familiar y las codornices en su ambiente.
+            </p>
+          </div>
+          <div style={{ borderRadius: "2.5rem", overflow: "hidden", backgroundColor: "#000", boxShadow: "0 12px 48px rgba(0,0,0,0.4)" }}>
+            <video
+              src="video jaula con codornices/1.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{ width: "100%", display: "block", aspectRatio: "16 / 9", objectFit: "cover" }}
+            />
+          </div>
+          <p style={{ textAlign: "center", fontSize: "0.8125rem", color: "#e8d5bc", opacity: 0.5, marginTop: "20px" }}>
+            Video real del criadero del Hogar de Codornices.
+          </p>
         </div>
       </section>
 
