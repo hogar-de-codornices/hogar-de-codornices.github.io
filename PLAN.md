@@ -29,10 +29,13 @@ Desarrollo de una landing page e-commerce interactiva para la venta de:
 - Detalles: `#714d25`
 - Blancos: `#ffffff` (tarjetas y módulos)
 
-## 💰 Precios de referencia (improvisados - a confirmar)
-- Caja de huevos de codorniz (12 u.): $4.500
-- Codorniz hembra (unidad): $9.000
-- Codorniz macho (unidad): $5.000
+## 💰 Precios de referencia (a re-confirmar con mamá)
+- Huevos comestibles orgánicos (docena): **$4.000**
+- Huevos fértiles mix (docena): **$6.000**
+- Polluelos (unidad): **$3.500** *(estimado a confirmar)*
+- Codorniz hembra adulta (unidad): $9.000
+- Codorniz macho (unidad): $6.000
+- Envío/entrega: **por cuenta del comprador** (ya informado en web y WhatsApp)
 
 ## 📸 Imágenes
 - Frontend visual y fotos generados por **Figma Make** (fotos reales de Unsplash de huevos y codornices).

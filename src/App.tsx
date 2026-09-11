@@ -3,18 +3,40 @@ import { useState, useEffect } from "react";
 const PRODUCTS = [
   {
     id: "huevos",
-    name: "Huevos de Codorniz",
+    name: "Huevos comestibles orgánicos",
     desc: "Frescos, ricos y saludables. Ideales para consumo diario y gastronomía artesanal.",
-    unit: "caja de 12 u.",
-    unitShort: "caja",
-    unitPlural: "cajas",
-    price: 4500,
+    unit: "docena",
+    unitShort: "docena",
+    unitPlural: "docenas",
+    price: 4000,
     img: "https://images.unsplash.com/photo-1645218167710-356801f89a7b?w=600&h=480&fit=crop&auto=format",
     alt: "Nido con huevos de codorniz frescos",
   },
   {
+    id: "fertiles",
+    name: "Huevos fértiles (mix de razas)",
+    desc: "Mix Japónica, Faraona, Silver y Jumbo. Para incubar y criar en tu criadero.",
+    unit: "docena",
+    unitShort: "docena",
+    unitPlural: "docenas",
+    price: 6000,
+    img: "https://images.unsplash.com/photo-1641070260526-6b91c010b6d6?w=600&h=480&fit=crop&auto=format",
+    alt: "Huevos de codorniz en nido para incubar",
+  },
+  {
+    id: "polluelos",
+    name: "Polluelos",
+    desc: "Crías sanas y activas, listas para empezar tu cría de codornices.",
+    unit: "unidad",
+    unitShort: "unidad",
+    unitPlural: "unidades",
+    price: 3500,
+    img: "https://images.unsplash.com/photo-1546272989-40c92939c6c2?w=600&h=480&fit=crop&auto=format",
+    alt: "Polluelo de codorniz recién nacido",
+  },
+  {
     id: "hembras",
-    name: "Codornices Hembras",
+    name: "Codornices hembras adultas",
     desc: "Ponedoras activas y saludables, listas para tu criadero o consumo familiar.",
     unit: "unidad",
     unitShort: "unidad",
@@ -25,12 +47,12 @@ const PRODUCTS = [
   },
   {
     id: "machos",
-    name: "Codornices Machos",
+    name: "Codornices machos",
     desc: "Reproductores fuertes y sanos, ideales para cría y reproducción controlada.",
     unit: "unidad",
     unitShort: "unidad",
     unitPlural: "unidades",
-    price: 5000,
+    price: 6000,
     img: "https://images.unsplash.com/photo-1748929170058-2277f819ceeb?w=600&h=480&fit=crop&auto=format",
     alt: "Codorniz macho posada en una rama",
   },
@@ -57,13 +79,17 @@ function buildMsg(cart: Record<string, number>) {
       "",
       `Total estimado: ${fmt(total)}`,
       "",
+      "Envío a coordinar, por cuenta del comprador.",
+      "",
       "¿Podemos coordinar la entrega en Buenos Aires? ¡Gracias! 🥚",
     ].join("\n")
   );
 }
 
 export default function App() {
-  const [cart, setCart] = useState<Record<string, number>>({ huevos: 0, hembras: 0, machos: 0 });
+  const [cart, setCart] = useState<Record<string, number>>(
+    () => PRODUCTS.reduce((acc, p) => ({ ...acc, [p.id]: 0 }), {})
+  );
   const [scrolled, setScrolled] = useState(false);
   const [menuAbierto, setMenuAbierto] = useState(false);
 
@@ -153,7 +179,7 @@ export default function App() {
               Huevos y<br />codornices<br /><em style={{ color: "#714d25" }}>del hogar.</em>
             </h1>
             <p style={{ fontSize: "1.0625rem", lineHeight: 1.7, color: "#5a3a1a", opacity: 0.82, marginBottom: "44px", maxWidth: "420px" }}>
-              Producción artesanal con cuidado familiar. Pedidos directos por WhatsApp, entrega coordinada en Buenos Aires.
+              Producción artesanal con cuidado familiar. Pedidos directos por WhatsApp, entrega coordinada en Buenos Aires. Envío por cuenta del comprador.
             </p>
             <div className="hero-actions-inline" style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
               <a href="#productos"
@@ -325,7 +351,7 @@ export default function App() {
                   ¿Listo para pedir?
                 </p>
                 <p style={{ fontSize: "0.9rem", color: "#e8d5bc", opacity: 0.65, lineHeight: 1.65 }}>
-                  El pedido se envía como mensaje pre-armado. Después acordamos el pago y coordinamos la entrega según tu zona.
+                  El pedido se envía como mensaje pre-armado. Después acordamos el pago y coordinamos la entrega según tu zona. El envío va por cuenta del comprador.
                 </p>
               </div>
               <a
@@ -377,7 +403,7 @@ export default function App() {
             <div>
               {[
                 { label: "Negocio", value: "Hogar de Codornices", href: undefined },
-                { label: "Zona de entrega", value: "Buenos Aires y alrededores", href: undefined },
+                { label: "Zona de entrega", value: "Buenos Aires y alrededores (envío por cuenta del comprador)", href: undefined },
                 { label: "WhatsApp", value: "+54 9 11 5691-6710", href: waSimple },
                 { label: "Instagram", value: "@hogar_de_codornices", href: "https://www.instagram.com/hogar_de_codornices/" },
               ].map((item) => (
